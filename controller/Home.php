@@ -29,10 +29,10 @@ class Home extends BaseController{
     function loggingIn(){
         $homeModel = $this->loadModel('HomeModel');
 
-        $name = $_POST['name'];
         $email = $_POST['email'];
+        $password = $_POST['password'];
 
-        $homeModel->loggingIn($name, $email);
+        $homeModel->loggingIn($email, $password);
     }
 
     function signingUp(){
