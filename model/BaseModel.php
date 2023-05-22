@@ -8,7 +8,7 @@ class BaseModel {
         $this->conn = new mysqli(
             "127.0.0.1",
             "root",
-            "password_baru",
+            "root",
             "post"
         );
     }
