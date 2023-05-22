@@ -1,5 +1,7 @@
 <?php
 
+define("BASEURL", "http://localhost/ProjectPemweb");
+
 $controller = $_GET['c'] ?? "Home";
 $method = $_GET['m'] ?? "index";
 
