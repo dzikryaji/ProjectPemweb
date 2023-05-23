@@ -6,17 +6,11 @@ class BaseModel {
 
     function __construct(){
 
-        $host = "127.0.0.1";
-        $username = "root";
-        $password = "";
-        $dbname = "project_pemweb";
-
         $this->conn = new mysqli(
-        
-            $host,
-            $username,
-            $password,
-            $dbname
+            DBHOST,
+            DBUSERNAME,
+            DBPASSWORD,
+            DBNAME
         );
 
         if ($this->conn->connect_errno) {
