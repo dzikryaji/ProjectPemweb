@@ -12,18 +12,18 @@ class Home extends BaseController{
 
             $user = $homeModel->getUser($userId);
 
-            $this->loadView("index", ["user" => $user]);
+            $this->loadView("index", "Home", ["user" => $user]);
         } else {
             header('Location: ' . BASEURL . '/index.php?c=Home&m=login');
         }
     }
 
     function login(){
-        $this->loadView("login");
+        $this->loadView("login", "Login");
     }
 
     function signUp(){
-        $this->loadView("signup");
+        $this->loadView("signup", "Sign Up");
     }
 
     function loggingIn(){

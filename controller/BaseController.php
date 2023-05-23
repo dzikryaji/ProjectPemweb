@@ -8,12 +8,14 @@ class BaseController {
         return new $modelName;
     }
 
-    function loadView($viewName, $data = array()){
+    function loadView($viewName, $title, $data = array()){
         foreach($data as $key => $value) {
             $$key = $value;
         }
 
+        include_once "view/templates/header.php";
         include_once "view/$viewName.php";
+        include_once "view/templates/footer.php";
     }
 
 }
