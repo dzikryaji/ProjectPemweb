@@ -1,13 +1,22 @@
-<h1>Login</h1>
-
-<form method="post" action="<?= BASEURL ?>/index.php?c=home&m=loggingIn">
-    <label for="email">Email</label>
-    <input type="email" name="email" id="email" required>
-    <br>
-    <label for="password">Password</label>
-    <input type="password" name="password" id="password" required>
-    <br>
-    <button>Log in</button>
-    <br>
-    <p><a href="<?= BASEURL ?>/index.php?c=Home&m=signup">Sign Up</a></p>
-</form>
+<section class="d-flex align-items-center justify-content-center vh-100">
+    <div class="card w-25 px-3 shadow" style="border-radius: 1rem;">
+    <div class="card-body">
+        <h2 class="card-title my-4">Login</h3>
+        <form method="post" action="<?= BASEURL ?>/index.php?c=home&m=loggingIn">
+            <div class="mb-3">
+                <label for="email" class="form-label">Email address</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password" name="password" required>
+            </div>
+            <div class="mb-3">
+                <input type="submit" class="btn btn-primary w-100" value="Log In">
+            </div>
+        </form>
+        <hr class="my-3 mx-2">
+        <p class="d-flex align-items-center justify-content-center my-3">
+            <span class="mx-1">Or </span> <a href="<?= BASEURL ?>/index.php?c=Home&m=signup">Sign Up</a>
+        </p>
+    </section>

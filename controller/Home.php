@@ -3,19 +3,16 @@
 class Home extends BaseController{
 
     function index(){
-        session_start();
-
         $homeModel = $this->loadModel('HomeModel');
 
         if (isset($_SESSION["user_id"])) {
             $userId = $_SESSION["user_id"];
-
             $user = $homeModel->getUser($userId);
-
-            $this->loadView("index", "Home", ["user" => $user]);
         } else {
-            header('Location: ' . BASEURL . '/index.php?c=Home&m=login');
+            $user = null;
         }
+
+        $this->loadView("index", "Home", ["user" => $user]);
     }
 
     function login(){
