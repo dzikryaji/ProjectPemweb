@@ -25,13 +25,12 @@
         </li>
       </ul>
       <ul class="navbar-nav">
-        <?php
-        if(isset($_SESSION['user_id'])): ?>
+        <?php if(isset($_SESSION['user_id'])): ?>
         <li class="nav-item">
             <a class ="nav-link" href="#">My Account</a>
         </li>
         <li class="nav-item">
-            <a class ="nav-link" href="<?= BASEURL ?>/index.php?c=Home&m=logout">Logout</a>
+            <a class ="nav-link" href="<?= BASEURL ?>/index.php?c=Home&m=logout" data-bs-toggle="modal" data-bs-target="#exampleModal">Logout</a>
         </li>
         <?php else: ?>
         <li class="nav-item">
@@ -42,3 +41,19 @@
     </div>
   </div>
 </nav>
+
+<?php if(isset($_SESSION['user_id'])): ?>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-hidden="true" >
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content p-3 " style="border-radius: 1rem;">
+      <div class="modal-body d-flex flex-column align-items-center justify-content-center">
+          <h5>YOU ARE ATTEMPTING TO LOGOUT</h5>
+          <h6 class="mb-5">Are you sure?</h6>
+          <h6 class="mb-3">Logged in as <?= $user['name'] ?></h6>
+          <a type="button" class="btn btn-primary w-100" href="<?= BASEURL ?>/index.php?c=Home&m=logout">LOGOUT</a>
+      </div>
+    </div>
+  </div>
+</div>
+<?php endif; ?>

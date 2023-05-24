@@ -3,22 +3,22 @@
         <div>
             <h6 class="mb-2">QUICK LINKS</h6>
             <ul class="list-unstyled">
-                <li>Account</li>
-                <li>About Us </li>
-                <li>Contact Us</li>
-                <li>Delivery Info</li>
-                <li>Wishlist FAQ</li>
-                <li>FAQ</li>
+                <li role="button">Account</li>
+                <li role="button">About Us</li>
+                <li role="button">Contact Us</li>
+                <li role="button">Delivery Info</li>
+                <li role="button">Wishlist FAQ</li>
+                <li role="button">FAQ</li>
             </ul>
         </div>
         <div>
             <h6 class="mb-2">CATEGORIES</h6>
             <ul class="list-unstyled">
-                <li>Fruits</li>
-                <li>Vegetables</li>
-                <li>Berries</li>
-                <li>Nuts</li>
-                <li>Seeds</li>
+                <li role="button">Fruits</li>
+                <li role="button">Vegetables</li>
+                <li role="button">Berries</li>
+                <li role="button">Nuts</li>
+                <li role="button">Seeds</li>
             </ul>
         </div>
         <div>
