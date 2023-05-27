@@ -1,29 +1,8 @@
 <?php
 
 class HomeModel extends BaseModel{
-    
-    function getUser($userId) {
-        $sql = "SELECT * FROM user
-                WHERE id = $userId";
-        
-        $result = $this->conn->query($sql);
-        
-        $user = $result->fetch_assoc();
 
-        return $user;
-    }
-
-    function insertUser($name, $email, $password, $password_confirmation){
-
-        if (empty($name)) {
-            die("Name is required");
-        } else if ( ! filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            die("Valid email is required");
-        } else if (strlen($password) < 8) {
-            die("Password must be at least 8 characters");
-        } else if ($password !== $password_confirmation) {
-            die("Passwords must match");
-        }
+    function insertUser($name, $email, $password){
         
         $password_hash = password_hash($password, PASSWORD_DEFAULT);
         
@@ -78,6 +57,8 @@ class HomeModel extends BaseModel{
                 header("Location: " . BASEURL);
                 exit;
             }
+        } else {
+            echo "password atau email salah";
         }
     }
 

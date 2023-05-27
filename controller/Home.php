@@ -3,24 +3,23 @@
 class Home extends BaseController{
 
     function index(){
-        $homeModel = $this->loadModel('HomeModel');
-
-        if (isset($_SESSION["user_id"])) {
-            $userId = $_SESSION["user_id"];
-            $user = $homeModel->getUser($userId);
-        } else {
-            $user = null;
-        }
-
-        $this->loadView("index", "Home", ["user" => $user]);
+        $this->loadView("index", "Home");
     }
 
     function login(){
-        $this->loadView("login", "Login");
+        if (isset($_SESSION["user_id"])) {
+            $this->index();
+        } else {
+            $this->loadView("login", "Login");
+        }
     }
 
     function signUp(){
-        $this->loadView("signup", "Sign Up");
+        if (isset($_SESSION["user_id"])) {
+            $this->index();
+        } else {
+            $this->loadView("signup", "Sign Up");
+        }
     }
 
     function loggingIn(){

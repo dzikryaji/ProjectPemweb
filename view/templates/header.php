@@ -15,7 +15,7 @@
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="#">Catalog</a>
+          <a class="nav-link" href="#">Catalog</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Orders Info</a>
@@ -25,13 +25,19 @@
         </li>
       </ul>
       <ul class="navbar-nav">
-        <?php if(isset($_SESSION['user_id'])): ?>
-        <li class="nav-item">
-            <a class ="nav-link" href="#">My Account</a>
-        </li>
-        <li class="nav-item">
-            <a class ="nav-link" href="<?= BASEURL ?>/index.php?c=Home&m=logout" data-bs-toggle="modal" data-bs-target="#exampleModal">Logout</a>
-        </li>
+        <?php if(isset($_SESSION['user_id'])): ?>            
+          <?php if($user['name']=='Admin' && $user['email']=='admin@vegan.org'): ?>
+          <li class="nav-item">
+            <a class ="nav-link" href="<?= BASEURL ?>/index.php?c=Product&m=AddProduct">Add Product</a>
+          </li>
+          <?php else: ?>
+            <li class="nav-item">
+            <a class ="nav-link" href="<?= BASEURL ?>">My Account</a>
+          </li>
+          <?php endif; ?>
+          <li class="nav-item">
+              <a class ="nav-link" data-bs-toggle="modal" data-bs-target="#logoutModal" role="button">Logout</a>
+          </li>
         <?php else: ?>
         <li class="nav-item">
             <a class ="nav-link" href="<?= BASEURL ?>/index.php?c=Home&m=login">Login</a>
@@ -44,7 +50,7 @@
 
 <?php if(isset($_SESSION['user_id'])): ?>
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-hidden="true" >
+<div class="modal fade" id="logoutModal" tabindex="-1" aria-hidden="true" >
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content p-3 " style="border-radius: 1rem;">
       <div class="modal-body d-flex flex-column align-items-center justify-content-center">

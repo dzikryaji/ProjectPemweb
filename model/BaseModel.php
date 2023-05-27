@@ -17,5 +17,15 @@ class BaseModel {
             die("Connection error: " . $this->conn->connect_error);
         }
     }
+    
+    function getUser($userId) {
+        $sql = "SELECT * FROM user
+                WHERE id = $userId";
+        
+        $result = $this->conn->query($sql);
+        
+        $user = $result->fetch_assoc();
 
+        return $user;
+    }
 }
