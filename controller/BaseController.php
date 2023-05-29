@@ -10,7 +10,6 @@ class BaseController {
     }
 
     function loadModel($modelName) {
-        $this->Model = null;
         include_once "model/$modelName.php";
         return new $modelName;
     }

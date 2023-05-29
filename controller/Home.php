@@ -3,7 +3,11 @@
 class Home extends BaseController{
 
     function index(){
-        $this->loadView("index", "Home");
+        $productModel = $this->loadModel("ProductModel");
+
+        $products = $productModel->getAllProduct();
+
+        $this->loadView("index", "Home", ['products' => $products] );
     }
 
     function login(){

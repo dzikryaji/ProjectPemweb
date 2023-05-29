@@ -12,9 +12,10 @@ CREATE TABLE `project_pemweb`.`user` (
 CREATE TABLE `project_pemweb`.`product`(
     `id_product` INT NOT NULL AUTO_INCREMENT , 
     `product_name` VARCHAR(255) NOT NULL , 
+    `category` VARCHAR(15) NOT NULL , 
     `price` INT NOT NULL , 
     `stock` INT NOT NULL , 
-    `description` VARCHAR(255) NOT NULL , 
+    `description` TEXT NOT NULL , 
     `product_image_name` VARCHAR(255) NOT NULL , 
     PRIMARY KEY (`id_product`)
 ) ENGINE = InnoDB;

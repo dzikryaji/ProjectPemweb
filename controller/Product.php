@@ -18,11 +18,10 @@ class Product extends BaseController {
         $productModel = $this->loadModel('ProductModel');
         $allowTypes = array('jpg','png','jpeg');
 
-        $date = new DateTime();
-        $date->setTimezone(new DateTimeZone("Asia/Jakarta"));
-        $uniqueNum = $date->format("ymdHis");
+        $uniqueNum = date("ymdHis");
 
         $productName = $_POST['productName'];
+        $category = $_POST['category'];
         $price = $_POST['price'];
         $stock = $_POST['stock'];
         $description = $_POST['description'];
@@ -35,7 +34,7 @@ class Product extends BaseController {
         }
 
         if(in_array($fileType, $allowTypes)){
-            $productModel->insertProduct($productName, $price, $stock, $description, $fileName, $targetFilePath);
+            $productModel->insertProduct($productName, $category, $price, $stock, $description, $fileName, $targetFilePath);
         } else {
             echo 'Sorry, only JPG, JPEG, PNG files are allowed to upload.';
         }
