@@ -4,10 +4,19 @@ class Home extends BaseController{
 
     function index(){
         $productModel = $this->loadModel("ProductModel");
+        $data = array();
 
-        $products = $productModel->getAllProduct();
+        if (isset($_GET['p'])){
+            $category = $_GET['p'];
 
-        $this->loadView("index", "Home", ['products' => $products] );
+            $products = $productModel->getProductbyCategory($category);
+
+            $data['category'] = $category;
+        } else {
+            $products = $productModel->getAllProduct();
+        }
+        $data['products'] = $products;
+        $this->loadView("index", "Home", $data);
     }
 
     function login(){

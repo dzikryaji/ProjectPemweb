@@ -46,4 +46,15 @@ class ProductModel extends BaseModel
 
         return $products;
     }
+
+    function getProductbyCategory($category)
+    {
+        $sql = "SELECT * FROM product WHERE category = '$category' ORDER BY product_name";
+        
+        $result = $this->conn->query($sql);
+        
+        $products = $result->fetch_all(MYSQLI_ASSOC);
+
+        return $products;
+    }
 }

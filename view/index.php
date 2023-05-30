@@ -12,34 +12,37 @@
             <p class="mb-2 fw-bold">Categories</p>
 
             <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="vegetablesCheck">
+                <input class="form-check-input" type="checkbox" value="Vegetables" id="vegetablesCheck" <?= (isset($category) && $category == 'Vegetables') ? 'checked' : '';?>>
                 <label class="form-check-label" for="vegetablesCheck">
                     Vegetables
                 </label>
             </div>
             <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="fruitsCheck">
+                <input class="form-check-input" type="checkbox" value="Fruits" id="fruitsCheck" <?= (isset($category) && $category == 'Fruits') ? 'checked' : '';?>>
                 <label class="form-check-label" for="fruitsCheck">
                     Fruits
                 </label>
             </div>
             <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="seedsCheck">
+                <input class="form-check-input" type="checkbox" value="Seeds" id="seedsCheck" <?= (isset($category) && $category == 'Seeds') ? 'checked' : '';?>>
                 <label class="form-check-label" for="seedsCheck">
                     Seeds
                 </label>
             </div>
             <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="berriesCheck">
+                <input class="form-check-input" type="checkbox" value="Berries" id="berriesCheck" <?= (isset($category) && $category == 'Berries') ? 'checked' : '';?>>
                 <label class="form-check-label" for="berriesCheck">
                     Berries
                 </label>
             </div>
         </div>
         <?php if(count($products) == 0) :?>
+        <?php if(isset($category)) :?>
             <div class="d-flex align-items-center justify-content-center vh-75 w-100">
-                <h3 class="text-secondary">There is no product yet....</h3>
+                <h3 class="text-secondary">There is no <?= (isset($category)) ? $category : '' ; ?>product yet....</h3>
             </div>
+        <?php else:?>
+        <?php endif;?>
         <?php else:?>
         <div class="container-fluid">
             <?php foreach($products as $index => $product) :?>

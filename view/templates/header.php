@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title> <?= $title ?> </title>
     <link rel="stylesheet" href="<?= BASEURL ?>/bootstrap/css/bootstrap.css">
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="<?= BASEURL ?>/js/script.js"></script>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm border-bottom-1">
