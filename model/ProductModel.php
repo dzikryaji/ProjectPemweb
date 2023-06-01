@@ -11,29 +11,35 @@ class ProductModel extends BaseModel
 
             $stmt = $this->conn->stmt_init();
 
-            if (!$stmt->prepare($sql)) {
-                die("SQL error: " . $this->conn->error);
-            }
+            try {
+                $stmt->prepare($sql);
 
-            $stmt->bind_param(
-                "ssiiss",
-                $productName,
-                $category,
-                $price,
-                $stock,
-                $description,
-                $fileName
-            );
+                $stmt->bind_param(
+                    "ssiiss",
+                    $productName,
+                    $category,
+                    $price,
+                    $stock,
+                    $description,
+                    $fileName
+                );
 
-            if ($stmt->execute()) {
-
-                header("Location: " . BASEURL);
-            } else {
-                die($this->conn->error . " " . $this->conn->errno);
+                $stmt->execute();
+            } catch (Exception $e) {
+                $msg = "SQL error: " . $this->conn->error;
             }
         } else {
-            echo "Sorry, there was an error uploading your file.";
+            $msg = "Sorry, there was an error uploading your file.";
         }
+
+        if (isset($msg)) {
+            Flasher::setFlash($msg, 'danger');
+        } else {
+            $msg = "Product has been added successfully";
+            Flasher::setFlash($msg, 'success');
+        }
+        header("Location: " . BASEURL . "/index.php?c=product&m=addproduct");
+        exit;
     }
 
     function getAllProduct()

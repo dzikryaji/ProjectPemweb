@@ -1,8 +1,9 @@
-<section class="d-flex align-items-center justify-content-center min-vh-100 p-3">
+<section class="d-flex flex-column align-items-center justify-content-center min-vh-100 p-3">
+    <?php Flasher::flash(); ?>
     <div class="card px-3 shadow" style="border-radius: 1rem; width: 500px;">
         <div class="card-body">
             <h2 class="card-title my-4">Add Product</h2>
-            <form method="post" action="<?= BASEURL ?>/index.php?c=product&m=addingproduct" enctype="multipart/form-data">
+            <form method="post" action="<?= BASEURL ?>/index.php?c=product&m=addproduct" enctype="multipart/form-data">
                 <div class="mb-3">
                     <input type="text" class="form-control" id="productName" name="productName" placeholder="Product Name" required>
                 </div>

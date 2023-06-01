@@ -1,8 +1,9 @@
-<section class="d-flex align-items-center justify-content-center vh-100">
-    <div class="card w-25 px-3 shadow" style="border-radius: 1rem;">
+<section class="d-flex flex-column align-items-center justify-content-center vh-100">
+    <?php Flasher::flash(); ?>
+    <div class="card w-25 px-3 shadow mb-3" style="border-radius: 1rem;">
         <div class="card-body">
             <h2 class="card-title my-4">Login</h2>
-            <form method="post" action="<?= BASEURL ?>/index.php?c=home&m=loggingIn">
+            <form method="post" action="<?= BASEURL ?>/index.php?c=home&m=login">
                 <div class="mb-3">
                     <input type="email" class="form-control" id="email" name="email" placeholder="Email Address" required>
                 </div>

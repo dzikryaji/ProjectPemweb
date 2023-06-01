@@ -1,65 +1,79 @@
 <?php
 
-class HomeModel extends BaseModel{
+class HomeModel extends BaseModel
+{
 
-    function insertUser($name, $email, $password){
-        
+    function insertUser($name, $email, $password)
+    {
+
         $password_hash = password_hash($password, PASSWORD_DEFAULT);
-        
+
         $sql = "INSERT INTO user (name, email, password_hash)
                 VALUES (?, ?, ?)";
-                
+
         $stmt = $this->conn->stmt_init();
-        
-        if ( ! $stmt->prepare($sql)) {
-            die("SQL error: " . $this->conn->error);
+
+        if (!$stmt->prepare($sql)) {
+            $msg =  "SQL error: " . $this->conn->error;
+            Flasher::setFlash($msg, 'danger');
+            header("Location: " . BASEURL . "/index.php?c=home&m=signup");
+            exit;
         }
-        
-        $stmt->bind_param("sss",
-                          $name,
-                          $email,
-                          $password_hash);
-                          
-        if ($stmt->execute()) {
 
-            $this->loggingIn($email, $password);
-            
-        } else {
-            
+        $stmt->bind_param(
+            "sss",
+            $name,
+            $email,
+            $password_hash
+        );
+
+        try {
+            $stmt->execute();
+        } catch (Exception $e) {
             if ($this->conn->errno === 1062) {
-                die("email already taken");
+                $msg =  "Email already taken";
+                Flasher::setFlash($msg, 'danger');
+                header("Location: " . BASEURL . "/index.php?c=home&m=signup");
+                exit;
             } else {
-                die($this->conn->error . " " . $this->conn->errno);
-            }
-        }        
-    }
-
-    function loggingIn($email, $password){
-            
-        $sql = sprintf("SELECT * FROM user
-                        WHERE email = '%s'",
-                        $this->conn->real_escape_string($email));
-        
-        $result = $this->conn->query($sql);
-        
-        $user = $result->fetch_assoc();
-        
-        if ($user) {
-            
-            if (password_verify($password, $user["password_hash"])) {
-                
-                session_start();
-                
-                session_regenerate_id();
-                
-                $_SESSION["user_id"] = $user["id"];
-                
-                header("Location: " . BASEURL);
+                $msg =  $this->conn->error . " " . $this->conn->errno;
+                Flasher::setFlash($msg, 'danger');
+                header("Location: " . BASEURL . "/index.php?c=home&m=signup");
                 exit;
             }
-        } else {
-            echo "password atau email salah";
         }
+
+        $this->loggingIn($email, $password);
     }
 
+    function loggingIn($email, $password)
+    {
+
+        $sql = sprintf(
+            "SELECT * FROM user
+                        WHERE email = '%s'",
+            $this->conn->real_escape_string($email)
+        );
+
+        $result = $this->conn->query($sql);
+
+        $user = $result->fetch_assoc();
+
+        if ($user && password_verify($password, $user["password_hash"])) {
+
+
+            session_start();
+
+            session_regenerate_id();
+
+            $_SESSION["user_id"] = $user["id"];
+
+            header("Location: " . BASEURL);
+            exit;
+        }
+        $msg =  "Incorrect Password or Email";
+        Flasher::setFlash($msg, 'danger');
+        header("Location: " . BASEURL . "/index.php?c=home&m=login");
+        exit;
+    }
 }

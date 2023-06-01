@@ -2,42 +2,45 @@
 
 class Product extends BaseController {
     function addProduct() {
-        if(isset($_SESSION['user_id'])){
-            $user = $this->Model->getUser($_SESSION['user_id']);
-            if ($user['name']=='Admin' && $user['email']=='admin@vegan.org') {
-                $this->loadView('addProduct', 'Add Product');
-            }else {
-                $this->loadView('index', 'Home');
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $productModel = $this->loadModel('ProductModel');
+            $allowTypes = array('jpg','png','jpeg');
+        
+            $uniqueNum = date("ymdHis");
+        
+            $productName = $_POST['productName'];
+            $category = $_POST['category'];
+            $price = $_POST['price'];
+            $stock = $_POST['stock'];
+            $description = $_POST['description'];
+            $fileName = $uniqueNum . "_" . basename($_FILES["productImage"]["name"]);
+            $targetFilePath = UPLOADDIR. "/" . $fileName;
+            $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
+        
+            if(!is_dir(UPLOADDIR)){
+                mkdir(UPLOADDIR);
+            }
+        
+            if(in_array($fileType, $allowTypes)){
+                $productModel->insertProduct($productName, $category, $price, $stock, $description, $fileName, $targetFilePath);
+            } else {
+                $msg = 'Only JPG, JPEG, PNG files are allowed to upload.';
+                Flasher::setFlash($msg, 'danger');
+                header("Location: " . BASEURL . "/index.php?c=product&m=addproduct");
+                exit;
             }
         } else {
-            $this->loadView('index', 'Home');
+            if(isset($_SESSION['user_id'])){
+                $user = $this->Model->getUser($_SESSION['user_id']);
+                if ($user['name']=='Admin' && $user['email']=='admin@vegan.org') {
+                    $this->loadView('addProduct', 'Add Product');
+                }else {
+                    $this->loadView('index', 'Home');
+                }
+            } else {
+                $this->loadView('index', 'Home');
+            }
         }
     }
 
-    function addingProduct() {
-        $productModel = $this->loadModel('ProductModel');
-        $allowTypes = array('jpg','png','jpeg');
-
-        $uniqueNum = date("ymdHis");
-
-        $productName = $_POST['productName'];
-        $category = $_POST['category'];
-        $price = $_POST['price'];
-        $stock = $_POST['stock'];
-        $description = $_POST['description'];
-        $fileName = $uniqueNum . "_" . basename($_FILES["productImage"]["name"]);
-        $targetFilePath = UPLOADDIR. "/" . $fileName;
-        $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
-
-        if(!is_dir(UPLOADDIR)){
-            mkdir(UPLOADDIR);
-        }
-
-        if(in_array($fileType, $allowTypes)){
-            $productModel->insertProduct($productName, $category, $price, $stock, $description, $fileName, $targetFilePath);
-        } else {
-            echo 'Sorry, only JPG, JPEG, PNG files are allowed to upload.';
-        }
-
-    }
 }

@@ -1,12 +1,14 @@
 <?php
 
-class Home extends BaseController{
+class Home extends BaseController
+{
 
-    function index(){
+    function index()
+    {
         $productModel = $this->loadModel("ProductModel");
         $data = array();
 
-        if (isset($_GET['p'])){
+        if (isset($_GET['p'])) {
             $category = $_GET['p'];
 
             $products = $productModel->getProductbyCategory($category);
@@ -19,49 +21,65 @@ class Home extends BaseController{
         $this->loadView("index", "Home", $data);
     }
 
-    function login(){
-        if (isset($_SESSION["user_id"])) {
-            $this->index();
+    function login()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $homeModel = $this->loadModel('HomeModel');
+
+            $email = $_POST['email'];
+            $password = $_POST['password'];
+
+            $homeModel->loggingIn($email, $password);
         } else {
-            $this->loadView("login", "Login");
+            if (isset($_SESSION["user_id"])) {
+                $this->index();
+            } else {
+                $this->loadView("login", "Login");
+            }
         }
     }
 
-    function signUp(){
-        if (isset($_SESSION["user_id"])) {
-            $this->index();
+    function signUp()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $homeModel = $this->loadModel('HomeModel');
+
+            if (empty($_POST["name"])) {
+                $msg = "Name is required";
+            } else if ( ! filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) {
+                $msg = "Valid email is required";
+            } else if (strlen($_POST["password"]) < 8) {
+                $msg = "Password must be at least 8 characters";
+            } else if ($_POST["password"] !== $_POST["password_confirmation"]) {
+                $msg = "Passwords must match";
+            }
+
+            if (isset($msg)){
+                Flasher::setFlash($msg, 'danger');
+                header("Location: " . BASEURL . "/index.php?c=home&m=signup");
+                exit;
+            }
+
+            $name = $_POST['name'];
+            $email = $_POST['email'];
+            $password = $_POST['password'];
+            $password_confirmation = $_POST['password_confirmation'];
+
+            $homeModel->insertUser($name, $email, $password, $password_confirmation);
         } else {
-            $this->loadView("signup", "Sign Up");
+            if (isset($_SESSION["user_id"])) {
+                $this->index();
+            } else {
+                $this->loadView("signup", "Sign Up");
+            }
         }
     }
 
-    function loggingIn(){
-        $homeModel = $this->loadModel('HomeModel');
-
-        $email = $_POST['email'];
-        $password = $_POST['password'];
-
-        $homeModel->loggingIn($email, $password);
-    }
-
-    function signingUp(){
-        $homeModel = $this->loadModel('HomeModel');
-
-        $name = $_POST['name'];
-        $email = $_POST['email'];
-        $password = $_POST['password'];
-        $password_confirmation = $_POST['password_confirmation'];
-
-        $homeModel->insertUser($name, $email, $password, $password_confirmation);
-    }
-
-    function logout(){
-        session_start();
-
+    function logout()
+    {
         session_destroy();
 
         header("Location: " . BASEURL);
         exit;
     }
-
 }

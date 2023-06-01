@@ -1,8 +1,9 @@
-<section class="d-flex align-items-center justify-content-center vh-100">
+<section class="d-flex flex-column align-items-center justify-content-center vh-100">
+    <?php Flasher::flash(); ?>
     <div class="card px-3 shadow" style="border-radius: 1rem; width: 500px;">
         <div class="card-body">
             <h2 class="card-title my-4">Sign Up</h2>
-                <form method="post" action="<?= BASEURL ?>/index.php?c=home&m=signingup">
+                <form method="post" action="<?= BASEURL ?>/index.php?c=home&m=signup">
                     <div class="mb-3">
                         <input type="text" class="form-control" id="name" name="name" placeholder="Name" required>
                     </div>
