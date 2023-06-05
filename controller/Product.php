@@ -17,8 +17,8 @@ class Product extends BaseController {
             $targetFilePath = UPLOADDIR. "/" . $fileName;
             $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
         
-            if(!is_dir(UPLOADDIR)){
-                mkdir(UPLOADDIR);
+            if(!is_dir("asset/".UPLOADDIR)){
+                mkdir("asset/".UPLOADDIR);
             }
         
             if(in_array($fileType, $allowTypes)){

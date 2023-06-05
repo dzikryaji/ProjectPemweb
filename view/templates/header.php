@@ -5,7 +5,7 @@
     <title> <?= $title ?> </title>
     <link rel="stylesheet" href="<?= BASEURL ?>/bootstrap/css/bootstrap.css">
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-    <script src="<?= BASEURL ?>/js/script.js"></script>
+    <script src="<?= BASEURL ?>/asset/js/script.js"></script>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm border-bottom-1">
@@ -33,7 +33,12 @@
             <a class ="nav-link" href="<?= BASEURL ?>/index.php?c=Product&m=AddProduct">Add Product</a>
           </li>
           <?php else: ?>
-            <li class="nav-item">
+          <li class="nav-item">
+            <a class ="nav-link" href="<?= BASEURL ?>/index.php?c=Cart&m=index"> 
+              <img src="asset/icon/cart.svg" alt="">
+            </a>
+          </li>
+          <li class="nav-item">
             <a class ="nav-link" href="<?= BASEURL ?>">My Account</a>
           </li>
           <?php endif; ?>
