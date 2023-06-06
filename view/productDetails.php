@@ -10,7 +10,7 @@
         <p>$<?= $product['price']; ?></p>
         <p><?= $product['description']; ?></p>
 
-        <form action="<?= BASEURL ?>/index.php?c=Cart&m=addToCart" method="post" class="d-flex">
+        <form action="<?= BASEURL ?>c=Cart&m=addToCart" method="post" class="d-flex">
           <div class="pe-3 w-75">
             <label class="form-label">Stock: <?= $product['stock']; ?></label>
             <input value="Add to Cart" class="btn btn-primary w-100" <?= isset($_SESSION['user_id']) ? 'type="submit"' : 'type="button" data-bs-toggle="modal" data-bs-target="#guestModal"'?>>

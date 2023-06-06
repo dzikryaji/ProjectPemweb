@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title> <?= $title ?> </title>
-    <link rel="stylesheet" href="<?= BASEURL ?>/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-    <script src="<?= BASEURL ?>/asset/js/script.js"></script>
+    <script src="asset/js/script.js"></script>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm border-bottom-1">
@@ -30,11 +30,11 @@
         <?php if(isset($_SESSION['user_id'])): ?>            
           <?php if($user['name']=='Admin' && $user['email']=='admin@vegan.org'): ?>
           <li class="nav-item">
-            <a class ="nav-link" href="<?= BASEURL ?>/index.php?c=Product&m=AddProduct">Add Product</a>
+            <a class ="nav-link" href="<?= BASEURL ?>c=Product&m=AddProduct">Add Product</a>
           </li>
           <?php else: ?>
           <li class="nav-item">
-            <a class ="nav-link" href="<?= BASEURL ?>/index.php?c=Cart&m=index"> 
+            <a class ="nav-link" href="<?= BASEURL ?>c=Cart&m=index"> 
               <img src="asset/icon/cart.svg" alt="">
             </a>
           </li>
@@ -47,7 +47,7 @@
           </li>
         <?php else: ?>
         <li class="nav-item">
-            <a class ="nav-link" href="<?= BASEURL ?>/index.php?c=Home&m=login">Login</a>
+            <a class ="nav-link" href="<?= BASEURL ?>c=Home&m=login">Login</a>
         </li>
         <?php endif; ?>
       </ul>
@@ -64,7 +64,7 @@
           <h5>YOU ARE ATTEMPTING TO LOGOUT</h5>
           <h6 class="mb-5">Are you sure?</h6>
           <h6 class="mb-3">Logged in as <?= $user['name'] ?></h6>
-          <a type="button" class="btn btn-primary w-100" href="<?= BASEURL ?>/index.php?c=Home&m=logout">LOGOUT</a>
+          <a type="button" class="btn btn-primary w-100" href="<?= BASEURL ?>c=Home&m=logout">LOGOUT</a>
       </div>
     </div>
   </div>

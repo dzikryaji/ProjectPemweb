@@ -16,7 +16,7 @@ class HomeModel extends BaseModel
         if (!$stmt->prepare($sql)) {
             $msg =  "SQL error: " . $this->conn->error;
             Flasher::setFlash($msg, 'danger');
-            header("Location: " . BASEURL . "/index.php?c=home&m=signup");
+            header("Location: " . BASEURL . "c=home&m=signup");
             exit;
         }
 
@@ -33,12 +33,12 @@ class HomeModel extends BaseModel
             if ($this->conn->errno === 1062) {
                 $msg =  "Email already taken";
                 Flasher::setFlash($msg, 'danger');
-                header("Location: " . BASEURL . "/index.php?c=home&m=signup");
+                header("Location: " . BASEURL . "c=home&m=signup");
                 exit;
             } else {
                 $msg =  $this->conn->error . " " . $this->conn->errno;
                 Flasher::setFlash($msg, 'danger');
-                header("Location: " . BASEURL . "/index.php?c=home&m=signup");
+                header("Location: " . BASEURL . "c=home&m=signup");
                 exit;
             }
         }
@@ -73,7 +73,7 @@ class HomeModel extends BaseModel
         }
         $msg =  "Incorrect Password or Email";
         Flasher::setFlash($msg, 'danger');
-        header("Location: " . BASEURL . "/index.php?c=home&m=login");
+        header("Location: " . BASEURL . "c=home&m=login");
         exit;
     }
 }

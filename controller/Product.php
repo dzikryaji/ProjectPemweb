@@ -26,7 +26,7 @@ class Product extends BaseController {
             } else {
                 $msg = 'Only JPG, JPEG, PNG files are allowed to upload.';
                 Flasher::setFlash($msg, 'danger');
-                header("Location: " . BASEURL . "/index.php?c=product&m=addproduct");
+                header("Location: " . BASEURL . "c=product&m=addproduct");
                 exit;
             }
         } else {

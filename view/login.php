@@ -3,7 +3,7 @@
     <div class="card w-25 px-3 shadow mb-3" style="border-radius: 1rem;">
         <div class="card-body">
             <h2 class="card-title my-4">Login</h2>
-            <form method="post" action="<?= BASEURL ?>/index.php?c=home&m=login">
+            <form method="post" action="<?= BASEURL ?>c=home&m=login">
                 <div class="mb-3">
                     <input type="email" class="form-control" id="email" name="email" placeholder="Email Address" required>
                 </div>
@@ -16,7 +16,7 @@
             </form>
             <hr class="my-3 mx-2">
             <p class="d-flex align-items-center justify-content-center my-3">
-                <span class="mx-1">Or </span> <a href="<?= BASEURL ?>/index.php?c=Home&m=signup">Sign Up</a>
+                <span class="mx-1">Or </span> <a href="<?= BASEURL ?>c=Home&m=signup">Sign Up</a>
             </p>
         </div>
     </div>

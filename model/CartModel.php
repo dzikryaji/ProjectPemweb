@@ -22,7 +22,7 @@ class CartModel extends BaseModel
 
             $stmt->execute();
 
-            header('Location: ' . BASEURL . '/index.php?c=cart&m=index');
+            header('Location: ' . BASEURL . 'c=cart&m=index');
             exit;
         } catch (Exception $e) {
             echo $this->conn->error;

@@ -38,7 +38,7 @@ class ProductModel extends BaseModel
             $msg = "Product has been added successfully";
             Flasher::setFlash($msg, 'success');
         }
-        header("Location: " . BASEURL . "/index.php?c=product&m=addproduct");
+        header("Location: " . BASEURL . "c=product&m=addproduct");
         exit;
     }
 

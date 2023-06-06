@@ -14,10 +14,10 @@
         <div>
             <h6 class="mb-2">CATEGORIES</h6>
             <ul class="list-unstyled">
-                <li><a class="link-secondary" href="./index.php?p=Vegetables" style="text-decoration: none;">Vegetables</a></li>
-                <li><a class="link-secondary" href="./index.php?p=Fruits" style="text-decoration: none;">Fruits</a></li>
-                <li><a class="link-secondary" href="./index.php?p=Seeds" style="text-decoration: none;">Seeds</a></li>
-                <li><a class="link-secondary" href="./index.php?p=Berries" style="text-decoration: none;">Berries</a></li>
+                <li><a class="link-secondary" href="<?= BASEURL; ?>p=Vegetables" style="text-decoration: none;">Vegetables</a></li>
+                <li><a class="link-secondary" href="<?= BASEURL; ?>p=Fruits" style="text-decoration: none;">Fruits</a></li>
+                <li><a class="link-secondary" href="<?= BASEURL; ?>p=Seeds" style="text-decoration: none;">Seeds</a></li>
+                <li><a class="link-secondary" href="<?= BASEURL; ?>p=Berries" style="text-decoration: none;">Berries</a></li>
             </ul>
         </div>
         <div>
@@ -29,6 +29,6 @@
             </ul>
         </div>
     </footer>
-    <script src="<?= BASEURL ?>/bootstrap/js/bootstrap.bundle.js"></script>
+    <script src="bootstrap/js/bootstrap.bundle.js"></script>
 </body>
 </html>

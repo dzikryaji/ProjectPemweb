@@ -56,7 +56,7 @@ class Home extends BaseController
 
             if (isset($msg)){
                 Flasher::setFlash($msg, 'danger');
-                header("Location: " . BASEURL . "/index.php?c=home&m=signup");
+                header("Location: " . BASEURL . "c=home&m=signup");
                 exit;
             }
 
