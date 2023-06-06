@@ -50,7 +50,7 @@
             <div class="row mb-4">
             <?php endif;?>
                 <div class="col-lg-4 col-md-12">
-                    <a class="link-dark" href="<?= BASEURL ?>" style="text-decoration: none;">    
+                    <a class="link-dark" href="<?= BASEURL ?>/index.php?c=product&m=productDetails" style="text-decoration: none;">    
                         <img src="asset/uploads/<?= $product['product_image_name'] ?>" class="img-thumbnail" alt="" style="height: 14rem; width: 14rem; object-fit: contain;">
                         <p class="fw-bold mb-1 mt-2"><?= $product['product_name'] ?></p>
                         <p>$<?= $product['price'] ?></p>

@@ -43,4 +43,8 @@ class Product extends BaseController {
         }
     }
 
+    function productDetails(){
+        $this->loadView("productDetails", "Product Details");
+    }
+
 }
