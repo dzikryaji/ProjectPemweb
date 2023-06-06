@@ -19,3 +19,11 @@ CREATE TABLE `project_pemweb`.`product`(
     `product_image_name` VARCHAR(255) NOT NULL , 
     PRIMARY KEY (`id_product`)
 ) ENGINE = InnoDB;
+
+CREATE TABLE `project_pemweb`.`cart`( 
+    `id_user` INT NOT NULL , 
+    `id_product` INT NOT NULL , 
+    `quantity` INT NOT NULL , 
+    FOREIGN KEY (`id_user`) REFERENCES user(`id`), 
+    FOREIGN KEY (`id_product`) REFERENCES product(`id_product`) 
+) ENGINE = InnoDB;

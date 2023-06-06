@@ -63,4 +63,16 @@ class ProductModel extends BaseModel
 
         return $products;
     }
+
+    function getProductbyId($id)
+    {
+        $sql = "SELECT * FROM product WHERE id_product = '$id'";
+        
+        $result = $this->conn->query($sql);
+        
+        $product = $result->fetch_assoc();
+
+        return $product;
+    }
+
 }

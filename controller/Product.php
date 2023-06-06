@@ -44,7 +44,12 @@ class Product extends BaseController {
     }
 
     function productDetails(){
-        $this->loadView("productDetails", "Product Details");
+        $productModel = $this->loadModel('ProductModel');
+        $id = $_GET['p'];
+
+        $product = $productModel->getProductbyId($id);
+
+        $this->loadView("productDetails", "Product Details", ['product' => $product]);
     }
 
 }
