@@ -3,34 +3,58 @@ $(()=>{
         if($('#vegetablesCheck').prop('checked')){
             filter('#vegetablesCheck');
         } else {
-            window.location.replace('./');
+            filter();
         }
     })
     $('#fruitsCheck').change(()=>{
         if($('#fruitsCheck').prop('checked')){
             filter('#fruitsCheck');
         }else {
-            window.location.replace('./');
+            filter();
         }
     })
     $('#seedsCheck').change(()=>{
         if($('#seedsCheck').prop('checked')){
             filter('#seedsCheck');
         }else {
-            window.location.replace('./');
+            filter();
         }
     })
     $('#berriesCheck').change(()=>{
         if($('#berriesCheck').prop('checked')){
             filter('#berriesCheck');
         }else {
-            window.location.replace('./');
+            filter();
         }
     })
 
-    function filter(chekcboxId){
-        let category = $(chekcboxId).val();
-        let redirect = "./index.php?p=" + category;
-        window.location.replace(redirect);
+    function filter(chekcboxId = ""){
+        let category = ""
+        if (chekcboxId != "") {
+            $('.categoryCheck').each(function(){
+                $(this).prop('checked', false);
+            });
+            $(chekcboxId).prop('checked', true);
+            category = $(chekcboxId).val();
+        }
+        let p = new Promise((ok, no) => {
+            $.post("http://localhost/ProjectPemweb/index.php?c=product&m=filterproduct", {
+              category: category,
+            })
+              .then((result) => {
+                            ok(result);
+                        })
+              .catch((error) => {
+                            no(error);
+                        });
+                    }).then(
+                        (result) => {
+                            
+                            $("#productContainer").fadeOut('slow', ()=> {
+                                $("#productContainer").html(result);
+                                $("#productContainer").fadeIn('slow');
+                            });
+                    }, (error) => {}
+          );
     }
 });

@@ -12,33 +12,34 @@
             <p class="mb-2 fw-bold">Categories</p>
 
             <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="Vegetables" id="vegetablesCheck" <?= (isset($category) && $category == 'Vegetables') ? 'checked' : '';?>>
+                <input class="form-check-input categoryCheck" type="checkbox" value="Vegetables" id="vegetablesCheck" <?= (isset($category) && $category == 'Vegetables') ? 'checked' : '';?>>
                 <label class="form-check-label" for="vegetablesCheck">
                     Vegetables
                 </label>
             </div>
             <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="Fruits" id="fruitsCheck" <?= (isset($category) && $category == 'Fruits') ? 'checked' : '';?>>
+                <input class="form-check-input categoryCheck" type="checkbox" value="Fruits" id="fruitsCheck" <?= (isset($category) && $category == 'Fruits') ? 'checked' : '';?>>
                 <label class="form-check-label" for="fruitsCheck">
                     Fruits
                 </label>
             </div>
             <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="Seeds" id="seedsCheck" <?= (isset($category) && $category == 'Seeds') ? 'checked' : '';?>>
+                <input class="form-check-input categoryCheck" type="checkbox" value="Seeds" id="seedsCheck" <?= (isset($category) && $category == 'Seeds') ? 'checked' : '';?>>
                 <label class="form-check-label" for="seedsCheck">
                     Seeds
                 </label>
             </div>
             <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="Berries" id="berriesCheck" <?= (isset($category) && $category == 'Berries') ? 'checked' : '';?>>
+                <input class="form-check-input categoryCheck" type="checkbox" value="Berries" id="berriesCheck" <?= (isset($category) && $category == 'Berries') ? 'checked' : '';?>>
                 <label class="form-check-label" for="berriesCheck">
                     Berries
                 </label>
             </div>
         </div>
+        <div class="w-100 min-vh-50" id="productContainer">
         <?php if(count($products) == 0) :?>
-            <div class="d-flex align-items-center justify-content-center vh-75 w-100">
-                <h3 class="text-secondary">There is no <?= (isset($category)) ? $category : '' ; ?>product yet....</h3>
+            <div class="d-flex align-items-center justify-content-center h-100 w-100">
+                <h3 class="text-secondary">There is no <?= (isset($category)) ? $category : '' ; ?> product yet....</h3>
             </div>
         <?php else:?>
         <div class="container-fluid">
@@ -59,5 +60,6 @@
             <?php endforeach;?>
         </div>
         <?php endif;?>
+        </div>
     </div>
 </section>
