@@ -38,6 +38,12 @@ CREATE TABLE `project_pemweb`.`address`(
   `optional` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+ALTER TABLE `address`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `address`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 CREATE TABLE `project_pemweb`.`payment`( 
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
@@ -48,3 +54,9 @@ CREATE TABLE `project_pemweb`.`payment`(
   `year` varchar(4) NOT NULL,
   `cvc` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+ALTER TABLE `payment`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `payment`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
