@@ -2,7 +2,7 @@
     <div class="mb-4" style="width: 40vw;">
         <h1>Vegan Shop</h1>
 
-        <p class="text-secondary">Hello <?= isset($user) ? $user['name'] : "Guest"; ?>, Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste, voluptatum
+        <p class="text-secondary">Hello <?=  $_SESSION['user_name'] ?? "Guest"; ?>, Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste, voluptatum
             officiis. Inventore quaerat est molestias vero sequi facere possimus id veniam provident, officiis sapiente repudiandae saepe blanditiis
             tenetur, culpa deleniti. </p>
     </div>

@@ -28,7 +28,7 @@
       </ul>
       <ul class="navbar-nav">
         <?php if(isset($_SESSION['user_id'])): ?>            
-          <?php if($user['name']=='Admin' && $user['email']=='admin@vegan.org'): ?>
+          <?php if($_SESSION['user_name']=='Admin' && $_SESSION['user_email']=='admin@vegan.org'): ?>
           <li class="nav-item">
             <a class ="nav-link" href="<?= BASEURL ?>c=Product&m=AddProduct">Add Product</a>
           </li>
@@ -63,7 +63,7 @@
       <div class="modal-body d-flex flex-column align-items-center justify-content-center">
           <h5>YOU ARE ATTEMPTING TO LOGOUT</h5>
           <h6 class="mb-5">Are you sure?</h6>
-          <h6 class="mb-3">Logged in as <?= $user['name'] ?></h6>
+          <h6 class="mb-3">Logged in as <?= $_SESSION['user_name'] ?></h6>
           <a type="button" class="btn btn-primary w-100" href="<?= BASEURL ?>c=Home&m=logout">LOGOUT</a>
       </div>
     </div>

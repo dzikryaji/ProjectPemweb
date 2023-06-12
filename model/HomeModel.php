@@ -61,12 +61,9 @@ class HomeModel extends BaseModel
 
         if ($user && password_verify($password, $user["password_hash"])) {
 
-
-            session_start();
-
-            session_regenerate_id();
-
             $_SESSION["user_id"] = $user["id"];
+            $_SESSION["user_email"] = $user["email"];
+            $_SESSION["user_name"] = $user["name"];
 
             header("Location: " . BASEURL);
             exit;

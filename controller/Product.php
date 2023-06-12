@@ -33,8 +33,7 @@ class Product extends BaseController
             }
         } else {
             if (isset($_SESSION['user_id'])) {
-                $user = $this->Model->getUser($_SESSION['user_id']);
-                if ($user['name'] == 'Admin' && $user['email'] == 'admin@vegan.org') {
+                if ($_SESSION['user_name'] == 'Admin' && $_SESSION['user_email'] == 'admin@vegan.org') {
                     $this->loadView('addProduct', 'Add Product');
                 } else {
                     $this->loadView('index', 'Home');
