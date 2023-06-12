@@ -4,23 +4,48 @@ class CartModel extends BaseModel
 {
     function insertToCart($idUser, $idProduct, $quantity)
     {
-        $sql = "INSERT INTO cart (id_user, id_product, quantity)
-                VALUES (?, ?, ?)";
-
+        $sql = "SELECT * FROM cart WHERE id_user = ? AND id_product = ?;";
 
         try {
-            $stmt = $this->conn->stmt_init();
-            
-            $stmt->prepare($sql);
+            $stmt = $this->conn->prepare($sql);
 
             $stmt->bind_param(
-                "iii",
+                "ii",
                 $idUser,
-                $idProduct,
-                $quantity
+                $idProduct
             );
 
             $stmt->execute();
+            $result = $stmt->get_result()->fetch_assoc();
+            
+            if($result) {
+                $sql = "UPDATE cart SET quantity = ? WHERE id_user = ? AND id_product = ?;";
+
+                $stmt = $this->conn->prepare($sql);
+
+                $stmt->bind_param(
+                    "iii",
+                    $quantity,
+                    $idUser,
+                    $idProduct
+                );
+    
+                $stmt->execute();
+            } else  {
+                $sql = "INSERT INTO cart (id_user, id_product, quantity)
+                VALUES (?, ?, ?)";
+
+                $stmt = $this->conn->prepare($sql);
+
+                $stmt->bind_param(
+                    "iii",
+                    $idUser,
+                    $idProduct,
+                    $quantity
+                );
+    
+                $stmt->execute();
+            }
 
             header('Location: ' . BASEURL . 'c=cart&m=index');
             exit;
