@@ -61,6 +61,11 @@ class HomeModel extends BaseModel
 
         if ($user && password_verify($password, $user["password_hash"])) {
 
+            $sql = "SELECT COUNT(id_user) AS cart_count FROM cart WHERE id_user = " . $user['id'];
+            $result = $this->conn->query($sql);
+            $cart = $result->fetch_assoc();
+
+            $_SESSION["cart_count"] = $cart["cart_count"];
             $_SESSION["user_id"] = $user["id"];
             $_SESSION["user_email"] = $user["email"];
             $_SESSION["user_name"] = $user["name"];

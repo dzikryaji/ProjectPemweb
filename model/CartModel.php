@@ -45,6 +45,7 @@ class CartModel extends BaseModel
                 );
     
                 $stmt->execute();
+                $_SESSION['cart_count']++;
             }
 
             header('Location: ' . BASEURL . 'c=cart&m=index');
@@ -78,6 +79,7 @@ class CartModel extends BaseModel
             $stmt->prepare($sql);
 
             $stmt->execute();
+            $_SESSION['cart_count']--;
 
             header('Location: ' . BASEURL . 'c=cart&m=index');
             exit;

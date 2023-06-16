@@ -33,6 +33,8 @@ class PaymentModel extends BaseModel
             $result = $this->conn->query($sql);
             $address = $result->fetch_assoc();
 
+            $_SESSION['cart_count'] = 0;
+
             $msg = "Payment has been added successfully";
             Flasher::setFlash($msg, 'success');
 

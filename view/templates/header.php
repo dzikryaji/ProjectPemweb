@@ -34,9 +34,16 @@
           </li>
           <?php else: ?>
           <li class="nav-item">
-            <a class ="nav-link" href="<?= BASEURL ?>c=Cart&m=index"> 
-              <img src="asset/icon/cart.svg" alt="">
-            </a>
+            <div class="position-relative">
+              <a class ="nav-link" href="<?= BASEURL ?>c=Cart&m=index"> 
+                <img  class="w-100"src="asset/icon/cart.svg" alt="">
+              </a>
+              <?php if($_SESSION['cart_count']) :?>
+              <span class="position-absolute translate-middle badge rounded-pill bg-danger" style="top: 20%; left: 85%;">
+                <?= $_SESSION['cart_count'] > 99 ? "99+" : $_SESSION['cart_count']?>
+              </span>
+              <?php endif;?>
+            </div>
           </li>
           <li class="nav-item">
             <a class ="nav-link" href="<?= BASEURL ?>">My Account</a>
