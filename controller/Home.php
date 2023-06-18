@@ -46,7 +46,7 @@ class Home extends BaseController
 
             if (empty($_POST["name"])) {
                 $msg = "Name is required";
-            } else if ( ! filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) {
+            } else if (!filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) {
                 $msg = "Valid email is required";
             } else if (strlen($_POST["password"]) < 8) {
                 $msg = "Password must be at least 8 characters";
@@ -54,7 +54,7 @@ class Home extends BaseController
                 $msg = "Passwords must match";
             }
 
-            if (isset($msg)){
+            if (isset($msg)) {
                 Flasher::setFlash($msg, 'danger');
                 header("Location: " . BASEURL . "c=home&m=signup");
                 exit;
@@ -72,6 +72,24 @@ class Home extends BaseController
             } else {
                 $this->loadView("signup", "Sign Up");
             }
+        }
+    }
+
+    function profile()
+    {
+        if (isset($_SESSION["user_id"])) {
+            $homeModel = $this->loadModel('HomeModel');
+            $data = $homeModel->getAccount();
+            $this->loadView("profile", "My Account", $data);
+        } else {
+            $this->login();
+        }
+    }
+
+    function editProfile(){
+        if ($_SERVER['REQUEST_METHOD'] === 'POST'){
+            $homeModel = $this->loadModel('HomeModel');
+            $homeModel->updateAccount($_POST);
         }
     }
 
