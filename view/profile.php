@@ -31,7 +31,7 @@
             </div>
             <div class="d-flex w-50 mb-3">
                 <div class="w-25 me-3">
-                    <input type="button" class="btn btn-light border border-primary text-primary w-100" id="clearBtn" value="Clear">
+                    <input type="button" class="btn btn-outline-primary w-100" id="clearBtn" value="Clear">
                 </div>
                 <div class="w-25">
                     <input type="submit" class="btn btn-primary w-100" value="Update">
