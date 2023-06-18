@@ -3,12 +3,6 @@
     <h5 class="mb-3"><b>Address</b> - Payment</h5>
     <div class="row mb-4">
         <div class="col-md-7 mt-3">
-            <style>
-                .form-control {
-                    border-color: #000;
-                    border-radius: 0px;
-                }
-            </style>
 
             <form action="?c=Cart&m=checkout" method="post">
                 <h5>Delivery Information</h5>

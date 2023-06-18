@@ -3,13 +3,6 @@
     <h5 class="mb-3">Address - <b>Payment</b></h5>
     <div class="row mb-4">
         <div class="col-md-7 mt-3">
-            <style>
-                .form-control {
-                    border-color: #000;
-                    border-radius: 0px;
-                }
-            </style>
-
             <form action="?c=Cart&m=payment" method="post">
                 <h5>Payment Detail</h5>
                 <div class="mb-3 mt-3">
@@ -23,11 +16,12 @@
                     <div class="col-4">
                         <div class="">
                             <select name="month" class="form-control" id="">
+                            <option value="placeholder" disabled selected style="color: #ced4da;" id="placeholder">Month</option>
                             <?php
                                 for ($i = 1; $i <= 12; $i++) {
                                     $value = $i < 10 ? 0 . $i : $i;
                                 ?>
-                                    <option value="<?= $value ?>" <?= isset($card['month']) && $i == $card['month'] ? "selected" : ""?>><?= $value ?></option>
+                                    <option id="option_<?= $value ?>" value="<?= $value ?>" <?= isset($card['month']) && $i == $card['month'] ? "selected" : ""?>><?= $value ?></option>
                                 <?php } ?>
                             </select>
                         </div>
@@ -35,6 +29,7 @@
                     <div class="col-4">
                         <div class="">
                             <select name="year" class="form-control" id="">
+                                <option value="placeholder" disabled selected style="color: #ced4da;">Year</option>
                                 <?php
                                 for ($i = 2020; $i < 2031; $i++) {
                                 ?>
@@ -57,7 +52,7 @@
                 </div>
 
                 <div class="mb-3 mt-3">
-                    <button type="submit" class="btn btn-primary text-white d-block w-100 py-3">Pay With Card</button>
+                    <button type="submit" class="btn btn-primary text-white d-block w-100">Pay With Card</button>
                 </div>
             </form>
         </div>

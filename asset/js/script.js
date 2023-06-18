@@ -27,11 +27,6 @@ $(()=>{
             filter();
         }
     })
-    $('#clearBtn').click(()=>{
-        $('.form-control').each(function(){
-            $(this).val("");
-        });
-    })
 
     function filter(chekcboxId = ""){
         let category = ""
@@ -62,4 +57,12 @@ $(()=>{
                     }, (error) => {}
           );
     }
+
+    
+    $('#clearBtn').click(()=>{
+        $('.form-control').each(function(){
+            $(this).val("");
+        });
+    })
+    
 });

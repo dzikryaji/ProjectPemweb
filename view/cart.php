@@ -50,7 +50,7 @@
                 </div>
             </div>
             <?php if (count($carts)):?>
-                <a href="?c=Cart&m=checkout" class="btn btn-primary text-white d-block w-100 py-3">Continue to Checkout</a>
+                <a href="?c=Cart&m=checkout" class="btn btn-primary text-white d-block w-100">Continue to Checkout</a>
             <?php endif?>
         </div>
     </div>
