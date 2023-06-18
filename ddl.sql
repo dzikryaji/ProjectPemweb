@@ -29,34 +29,25 @@ CREATE TABLE `project_pemweb`.`cart`(
 ) ENGINE = InnoDB;
 
 CREATE TABLE `project_pemweb`.`address`( 
-  `id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `address` varchar(255) NOT NULL,
-  `contact_number` varchar(255) NOT NULL,
-  `city` varchar(255) NOT NULL,
-  `province` varchar(255) NOT NULL,
-  `optional` text NOT NULL
+    `id` INT NOT NULL AUTO_INCREMENT,
+    `id_user` INT NOT NULL , 
+    `name` VARCHAR(255) NOT NULL,
+    `address` VARCHAR(255) NOT NULL,
+    `contact_number` VARCHAR(255) NOT NULL,
+    `city` VARCHAR(255) NOT NULL,
+    `province` VARCHAR(255) NOT NULL,
+        PRIMARY KEY (`id`),
+        FOREIGN KEY (`id_user`) REFERENCES user(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-ALTER TABLE `address`
-  ADD PRIMARY KEY (`id`);
-
-ALTER TABLE `address`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
-CREATE TABLE `project_pemweb`.`payment`( 
-  `id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `address_id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `number` varchar(255) NOT NULL,
-  `month` varchar(2) NOT NULL,
-  `year` varchar(4) NOT NULL,
-  `cvc` varchar(10) NOT NULL
+CREATE TABLE `project_pemweb`.`card`( 
+    `id` INT NOT NULL AUTO_INCREMENT,
+    `id_user` INT NOT NULL,
+    `name` varchar(255) NOT NULL,
+    `number` varchar(255) NOT NULL,
+    `month` INT NOT NULL,
+    `year` INT NOT NULL,
+    `cvc` INT NOT NULL,
+        PRIMARY KEY (`id`),
+        FOREIGN KEY (`id_user`) REFERENCES user(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-ALTER TABLE `payment`
-  ADD PRIMARY KEY (`id`);
-
-ALTER TABLE `payment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;

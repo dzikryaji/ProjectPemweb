@@ -5,23 +5,23 @@
         <div class="col-md-8 pe-2 pe-lg-5">
             <?php 
                 $total = 0;
-                foreach ($carts as $key => $item) {
+                foreach ($carts as $key => $item) :
                 $total += $item['price'] * $item['quantity'];
             ?>
-            <div class="row border-bottom border-secondary py-3 mb-3">
-                <div class="col-3 bg-light">
-                    <img src="asset/uploads/<?= $item['product_image_name'] ?>" alt="" style="width: 100%;">
+            <div class="row py-3 mb-3 <?= $key < count($carts)-1 ? "border-bottom border-secondary" : ""?>">
+                <div class="col-3">
+                    <img src="asset/uploads/<?= $item['product_image_name'] ?>" alt="" class="img-thumbnail" style="width: 8rem; height: 8rem; object-fit: contain;">
                 </div>
                 <div class="col-9">
                     <h4><?= $item['product_name'] ?></h4>
-                    <small><?= $item['quantity'] ?></small>
-                    <h4>Rp. <?= number_format($item['price'] * $item['quantity']) ?></h4>
+                    <small>Quantity: <?= $item['quantity'] ?></small>
+                    <h4>$<?= number_format($item['price'] * $item['quantity']) ?></h4>
                     <div class="text-end">
                         <a href="?c=Cart&m=deleteCart&id_product=<?= $item['id_product'] ?>" class="btn text-dark text-decoration-underline">Remove</a>
                     </div>
                 </div>
             </div>
-            <?php } ?>
+            <?php endforeach; ?>
         </div>
         <div class="col-md-4">
             <h4 class="mb-4">Order Summary</h4>
@@ -30,7 +30,7 @@
                     <h5>Subtotal</h5>
                 </div>
                 <div class="float-end">
-                    <h5>Rp. <?= number_format($total) ?></h5>
+                    <h5>$<?= number_format($total) ?></h5>
                 </div>
             </div>
             <div class="clearfix border-bottom border-secondary pb-3 mb-3">
@@ -49,8 +49,9 @@
                     <h5>Rp. <?= number_format($total) ?></h5>
                 </div>
             </div>
-            <a href="?c=Cart&m=checkout" class="btn bg-dark text-white d-block w-100 py-3">Continue to Checkout</a>
-            <!-- <button class="btn bg-dark text-white d-block w-100 py-3">Continue to Checkout</button> -->
+            <?php if (count($carts)):?>
+                <a href="?c=Cart&m=checkout" class="btn btn-primary text-white d-block w-100 py-3">Continue to Checkout</a>
+            <?php endif?>
         </div>
     </div>
     <div class="row">

@@ -1,10 +1,7 @@
 <section class="min-vh-100 px-5 py-3 mb-0">
-    <div class="mb-4" style="width: 40vw;">
-        <h1>Vegan Shop</h1>
-
-        <p class="text-secondary">Hello <?=  $_SESSION['user_name'] ?? "Guest"; ?>, Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste, voluptatum
-            officiis. Inventore quaerat est molestias vero sequi facere possimus id veniam provident, officiis sapiente repudiandae saepe blanditiis
-            tenetur, culpa deleniti. </p>
+    <div class="mb-5 ms-5 ps-5" style="width: 40vw;">
+        <h1 style="text-shadow: 5px 3px 5px rgba(0,0,0, 0.2);">Vegan Shop</h1>
+        <h3 style="text-shadow: 5px 3px 5px rgba(0,0,0, 0.2);">Lots of goodies for a great price</h3>
     </div>
     <div class=" d-flex w-100 min-vh-100">
         <div style="width: 15rem;">
