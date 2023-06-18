@@ -47,7 +47,7 @@
             </div>
           </li>
           <li class="nav-item">
-            <a class ="nav-link" href="<?= BASEURL ?>">My Account</a>
+            <a class ="nav-link" href="<?= BASEURL ?>c=Home&m=profile">My Account</a>
           </li>
           <?php endif; ?>
           <li class="nav-item">
