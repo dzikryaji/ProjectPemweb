@@ -13,10 +13,10 @@
             <form action="?c=Cart&m=payment" method="post">
                 <h5>Payment Detail</h5>
                 <div class="mb-3 mt-3">
-                    <input type="text" class="form-control" required placeholder="Cardholder Name" name="name">
+                    <input type="text" class="form-control" required placeholder="Cardholder Name" name="name" value="<?= $card['name'] ?? "" ?>">
                 </div>
                 <div class="mb-3 mt-3">
-                    <input type="text" class="form-control" required placeholder="Card Number" name="number">
+                    <input type="number" class="form-control" required placeholder="Card Number" name="number" value="<?= $card['number'] ?? "" ?>">
                 </div>
 
                 <div class="row">
@@ -27,7 +27,7 @@
                                 for ($i = 1; $i <= 12; $i++) {
                                     $value = $i < 10 ? 0 . $i : $i;
                                 ?>
-                                    <option value="<?= $value ?>"><?= $value ?></option>
+                                    <option value="<?= $value ?>" <?= isset($card['month']) && $i == $card['month'] ? "selected" : ""?>><?= $value ?></option>
                                 <?php } ?>
                             </select>
                         </div>
@@ -38,14 +38,14 @@
                                 <?php
                                 for ($i = 2020; $i < 2031; $i++) {
                                 ?>
-                                    <option value="<?= $i ?>"><?= $i ?></option>
+                                    <option value="<?= $i ?>" <?=  isset($card['month']) && $i == $card['year'] ? "selected" : ""?>><?= $i ?></option>
                                 <?php } ?>
                             </select>
                         </div>
                     </div>
                     <div class="col-4">
                         <div class="">
-                            <input type="text" class="form-control" required placeholder="CVC" name="cvc">
+                            <input type="number" class="form-control" required placeholder="CVC" name="cvc" value="<?= $card['cvc'] ?? "" ?>">
                         </div>
                     </div>
                 </div>

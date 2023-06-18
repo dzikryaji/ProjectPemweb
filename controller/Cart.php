@@ -69,23 +69,24 @@ class Cart extends BaseController
 
     function payment()
     {
+        $Payment = $this->loadModel('PaymentModel');
         if (!isset($_SESSION['user_id'])) {
             header("Location: " . BASEURL);
             exit;
         }
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            if ($_POST['saveContactCheck']) {
-                $Payment = $this->loadModel('PaymentModel');
+            if (isset($_POST['saveCardCheck'])) {
                 $Payment->save($_POST);
             }
             $Cart = $this->loadModel('CartModel');
             $Cart->clear();
-
+            
             header('Location: ' . BASEURL . 'c=Cart&m=payment');
             exit;
         } else {
             $modal = $this->loadModel('CartModel');
             $data['carts'] = $modal->get();
+            $data['card'] = $Payment->get();
 
             $this->loadView("payment", "Form Payment", $data);
         }

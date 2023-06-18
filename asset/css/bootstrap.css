@@ -10834,4 +10834,9 @@ textarea.form-control-lg {
   }
 }
 
+.form-control::-webkit-outer-spin-button,
+.form-control::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 /*# sourceMappingURL=bootstrap.css.map */
