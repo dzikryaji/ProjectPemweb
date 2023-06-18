@@ -15,12 +15,25 @@ class Cart extends BaseController
     {
         $idProduct = $_POST['idProduct'];
         $quantity = $_POST['quantity'];
-        if (isset($_SESSION['user_id'])) {
+        if (isset($_SESSION['user_id']) && !$_SESSION['name'] == 'Admin' && !$_SESSION['email'] == 'admin@vegan.org') {
             $idUser = $_SESSION['user_id'];
+            $productModel = $this->loadModel('ProductModel');
+            $product = $productModel->getProductbyId($idProduct);
 
-            $cartModel = $this->loadModel('CartModel');
-            $cartModel->insertToCart($idUser, $idProduct, $quantity);
+            if($quantity < $product['stock']){
+                $cartModel = $this->loadModel('CartModel');
+                $cartModel->insertToCart($idUser, $idProduct, $quantity);
+            } else {
+                $msg = "Quantity must less than stock";
+                Flasher::setFlash($msg, 'danger');
+
+                header("Location: " . BASEURL);
+                exit;
+            }
         } else {
+            $msg = "Login to Add Product to Cart";
+            Flasher::setFlash($msg, 'danger');
+
             header("Location: " . BASEURL);
             exit;
         }

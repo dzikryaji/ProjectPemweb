@@ -43,7 +43,7 @@
                 </div>
 
                 <div class="mb-3 mt-3">
-                    <button type="submit" class="btn btn-primary text-white d-block w-100 py-3">Continue to Payment</button>
+                    <button type="submit" class="btn btn-primary text-white d-block w-100">Continue to Payment</button>
                 </div>
             </form>
         </div>

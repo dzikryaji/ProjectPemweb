@@ -1,4 +1,5 @@
 <section class=" px-5 py-3 mb-0">
+  <?php Flasher::flash(); ?>
   <div class="d-flex h-100">
     <div class="d-flex py-5 h-100 w-50 justify-content-center">
       <img src="asset/uploads/<?= $product['product_image_name']; ?>" class="img-thumbnail" alt="<?= $product['product_name']; ?> image" style="height: 24rem; width: 24rem; object-fit: contain;">
@@ -11,6 +12,7 @@
         <p><?= $product['description']; ?></p>
 
         <form action="<?= BASEURL ?>c=Cart&m=addToCart" method="post" class="d-flex">
+          <?php if($product['stock'] && !($_SESSION['user_email'] == "admin@vegan.org")): ?>
           <div class="pe-3 w-75">
             <label class="form-label">Stock: <?= $product['stock']; ?></label>
             <input value="Add to Cart" class="btn btn-primary w-100" <?= isset($_SESSION['user_id']) ? 'type="submit"' : 'type="button" data-bs-toggle="modal" data-bs-target="#guestModal"'?>>
@@ -20,7 +22,17 @@
             <label class="form-label" for="quantity">Quantity</label>
             <input type="number" name="quantity" id="quantity" class="form-control" min="1" max="<?= $product['stock']; ?>" value="1">
           </div>
+          <?php else:?>
+            <div class="pe-3 w-75">
+            <label class="form-label">Stock: <?= $product['stock']; ?></label>
+            <input value="<?= !$product['stock'] ? "Out of Product" : "Add to Cart" ?>" class="btn btn-primary w-100" disabled>
+          </div>
 
+          <div class=" pe-3 w-25">
+            <label class="form-label" for="quantity">Quantity</label>
+            <input type="number" name="quantity" id="quantity" class="form-control"  max="<?= $product['stock']; ?>" value="0" disabled>
+          </div>
+          <?php endif; ?>
           <input type="hidden" name="idProduct" value="<?= $product['id_product']; ?>">
         </form>
       </div>
