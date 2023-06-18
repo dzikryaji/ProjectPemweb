@@ -50,7 +50,7 @@ class Cart extends BaseController
             exit;
         }
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            if ($_POST['saveContactCheck']) {
+            if (isset($_POST['saveContactCheck'])) {
                 $address = $this->loadModel('AddressModel');
                 $address->save($_POST);
             }
@@ -59,7 +59,9 @@ class Cart extends BaseController
             exit;
         } else {
             $modal = $this->loadModel('CartModel');
+            $address = $this->loadModel('AddressModel');
             $data['carts'] = $modal->get();
+            $data['address'] = $address->get();
 
             $this->loadView("checkout", "Form Checkout", $data);
         }

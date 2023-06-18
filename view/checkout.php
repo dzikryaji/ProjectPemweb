@@ -14,23 +14,23 @@
                 <h5>Delivery Information</h5>
 
                 <div class="mb-3 mt-3">
-                    <input type="text" class="form-control" required placeholder="Name" name="name">
+                    <input type="text" class="form-control" required placeholder="Name" name="name" value="<?= $address['name'] ?? ""?>">
                 </div>
                 <div class="mb-3 mt-3">
-                    <input type="text" class="form-control" required placeholder="Address" name="address">
+                    <input type="text" class="form-control" required placeholder="Address" name="address" value="<?= $address['address'] ?? ""?>">
                 </div>
                 <div class="mb-3 mt-3">
-                    <input type="tel" class="form-control" required placeholder="Contact Number" name="contact_number">
+                    <input type="tel" class="form-control" required placeholder="Contact Number" name="contact_number" value="<?= $address['contact_number'] ?? ""?>">
                 </div>
                 <div class="row">
                     <div class="col-6">
                         <div>
-                            <input type="text" class="form-control" required placeholder="City" name="city">
+                            <input type="text" class="form-control" required placeholder="City" name="city" value="<?= $address['city'] ?? ""?>">
                         </div>
                     </div>
                     <div class="col-6">
                         <div>
-                            <input type="text" class="form-control" required placeholder="Province" name="province">
+                            <input type="text" class="form-control" required placeholder="Province" name="province" value="<?= $address['province'] ?? ""?>">
                         </div>
                     </div>
                 </div>

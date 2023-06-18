@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title> <?= $title ?> </title>
     <link rel="stylesheet" href="asset/css/bootstrap.css">
-    <script src="bootstrap/js/bootstrap.bundle.js"></script>
+    <script src="asset/js/bootstrap.bundle.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
     <script src="asset/js/script.js"></script>
 </head>
