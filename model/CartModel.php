@@ -59,7 +59,8 @@ class CartModel extends BaseModel
     {
         $sql = "SELECT * FROM `cart` a
         left join user b on b.id = a.id_user
-        left join product c on c.id_product = a.id_product;";
+        left join product c on c.id_product = a.id_product
+        WHERE b.id = {$_SESSION['user_id']};";
 
         $result = $this->conn->query($sql);
 

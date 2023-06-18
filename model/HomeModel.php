@@ -79,21 +79,27 @@ class HomeModel extends BaseModel
         exit;
     }
 
-    function getAccount(){
+    function getAccount()
+    {
         $sql = "SELECT name, email FROM user WHERE id = {$_SESSION['user_id']}";
         $result = $this->conn->query($sql);
         $user = $result->fetch_assoc();
 
-        
+
         $sql = "SELECT address, contact_number, city, province FROM address WHERE id_user = {$_SESSION['user_id']}";
         $result = $this->conn->query($sql);
         $address = $result->fetch_assoc();
 
-        $account = array_merge($user, $address);
+        if ($address) {
+            $account = array_merge($user, $address);
+        } else {
+            $account = $user;
+        }
         return $account;
     }
 
-    function updateAccount($data){
+    function updateAccount($data)
+    {
         try {
             $this->conn->begin_transaction();
 
@@ -112,7 +118,12 @@ class HomeModel extends BaseModel
             );
             $stmt->execute();
 
-            $sql = "UPDATE address SET
+            $sql = "SELECT * FROM address WHERE id_user = {$_SESSION['user_id']}";
+            $result = $this->conn->query($sql);
+            $address = $result->fetch_assoc();
+
+            if($address){
+                $sql = "UPDATE address SET
                             name = ?,
                             address = ?,
                             contact_number = ?,
@@ -120,26 +131,43 @@ class HomeModel extends BaseModel
                             province = ?
                         WHERE id_user = ?";
 
-            $stmt = $this->conn->stmt_init();
-            $stmt->prepare($sql);
-            $stmt->bind_param(
-                "sssssi",
-                $data['name'],
-                $data['address'],
-                $data['contact_number'],
-                $data['city'],
-                $data['province'],
-                $_SESSION['user_id']
-            );
-            $stmt->execute();
+                $stmt = $this->conn->stmt_init();
+                $stmt->prepare($sql);
+                $stmt->bind_param(
+                    "sssssi",
+                    $data['name'],
+                    $data['address'],
+                    $data['contact_number'],
+                    $data['city'],
+                    $data['province'],
+                    $_SESSION['user_id']
+                );
+                $stmt->execute();   
+            } else {
+                $sql = "INSERT INTO address (
+                            id_user,
+                            name,
+                            address,
+                            contact_number,
+                            city,
+                            province
+                        )
+                        VALUES (?, ?, ?, ?, ?, ?)";
 
+                $stmt = $this->conn->stmt_init();
+                $stmt->prepare($sql);
+                $stmt->bind_param(
+                    "isssss",
+                    $_SESSION['user_id'],
+                    $data['name'],
+                    $data['address'],
+                    $data['contact_number'],
+                    $data['city'],
+                    $data['province']
+                );
+                $stmt->execute();
+            }
             $this->conn->commit();
-
-            // var_dump($data);
-            // echo "<br>";
-            // var_dump($stmt);
-            // echo "<br>";
-            // var_dump($sql);
 
             header('Location: ' . BASEURL . 'c=Home&m=index');
             exit;
