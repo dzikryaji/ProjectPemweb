@@ -46,7 +46,7 @@
                     <h5>Total</h5>
                 </div>
                 <div class="float-end">
-                    <h5>Rp. <?= number_format($total) ?></h5>
+                    <h5>$<?= number_format($total) ?></h5>
                 </div>
             </div>
             <?php if (count($carts)):?>

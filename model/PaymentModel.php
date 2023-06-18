@@ -24,22 +24,9 @@ class PaymentModel extends BaseModel
             $stmt->prepare($sql);
             $stmt->execute();
 
-            echo "delete from cart where id_user = {$_SESSION['user_id']}";
-            $stmt1 = $this->conn->stmt_init();
-            $stmt1->prepare("delete from cart where id_user = {$_SESSION['user_id']}");
-            $stmt1->execute();
-
             $sql = "SELECT id FROM payment order by id desc limit 1";
             $result = $this->conn->query($sql);
             $address = $result->fetch_assoc();
-
-            $_SESSION['cart_count'] = 0;
-
-            $msg = "Payment has been added successfully";
-            Flasher::setFlash($msg, 'success');
-
-            header('Location: ' . BASEURL . 'c=Home&m=index');
-            exit;
         } catch (Exception $e) {
             var_dump($e);
             echo $this->conn->error;

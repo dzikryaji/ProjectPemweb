@@ -10,9 +10,9 @@
                 }
             </style>
 
-            <form action="?c=Cart&m=proccess_checkout" method="post">
+            <form action="?c=Cart&m=checkout" method="post">
                 <h5>Delivery Information</h5>
-                
+
                 <div class="mb-3 mt-3">
                     <input type="text" class="form-control" required placeholder="Name" name="name">
                 </div>
@@ -20,53 +20,80 @@
                     <input type="text" class="form-control" required placeholder="Address" name="address">
                 </div>
                 <div class="mb-3 mt-3">
-                    <input type="text" class="form-control" required placeholder="Contact Number" name="contact_number">
+                    <input type="tel" class="form-control" required placeholder="Contact Number" name="contact_number">
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <div class="">
+                        <div>
                             <input type="text" class="form-control" required placeholder="City" name="city">
                         </div>
                     </div>
                     <div class="col-6">
-                        <div class="">
+                        <div>
                             <input type="text" class="form-control" required placeholder="Province" name="province">
                         </div>
                     </div>
                 </div>
-                <div class="mb-3 mt-3">
-                    <input type="text" class="form-control" required placeholder="Optional" name="optional">
+
+                <div class="form-check mb-3 mt-3">
+                    <input class="form-check-input" type="checkbox" value="save" id="saveContactCheck" name="saveContactCheck">
+                    <label class="form-check-label" for="saveContactCheck">
+                        Save Contact Information
+                    </label>
                 </div>
 
                 <div class="mb-3 mt-3">
-                    <input type="checkbox" class="" id="" placeholder="">
-                    <small>Save contact information</small>
-                </div>
-
-                <div class="mb-3 mt-3">
-                    <button type="submit" class="btn bg-dark text-white d-block w-100 py-3">Continue to Payment</button>
+                    <button type="submit" class="btn btn-primary text-white d-block w-100 py-3">Continue to Payment</button>
                 </div>
             </form>
         </div>
-        <div class="col-md-5 pe-2 pe-lg-5">
-            <?php 
-                $total = 0;
-                foreach ($carts as $key => $item) {
-                $total += $item['price'] * $item['quantity'];
+        <div class="col-md-5 pe-lg-5">
+            <?php
+            $subTotal = 0;
+            $shippingCost = 3;
+            foreach ($carts as $key => $item) :
+                $subTotal += $item['price'] * $item['quantity'];
             ?>
-            <div class="row border-bottom border-secondary py-3 mb-3">
-                <div class="col-3 bg-light">
-                    <img src="asset/uploads/<?= $item['product_image_name'] ?>" alt="" style="width: 100%;">
-                </div>
-                <div class="col-9">
-                    <h4><?= $item['product_name'] ?></h4>
-                    <small><?= $item['quantity'] ?></small>
-                    <h4>Rp. <?= number_format($item['price'] * $item['quantity']) ?></h4>
-                    <div class="text-end">
+                <div class="row py-3 mb-3 <?= $key < count($carts) - 1 ? "border-bottom border-secondary" : "" ?>">
+                    <div class="col-4">
+                        <img src="asset/uploads/<?= $item['product_image_name'] ?>" alt="" class="img-thumbnail" style="width: 8rem; height: 8rem; object-fit: contain;">
+                    </div>
+                    <div class="col-8">
+                        <h4><?= $item['product_name'] ?></h4>
+                        <small>Quantity: <?= $item['quantity'] ?></small>
+                        <h4>$<?= number_format($item['price'] * $item['quantity']) ?></h4>
+                        <div class="text-end">
+                        </div>
                     </div>
                 </div>
+            <?php
+            endforeach;
+            $total = $subTotal + $shippingCost;
+            ?>
+            <div class="clearfix mb-2">
+                <div class="float-start">
+                    <h5>Subtotal</h5>
+                </div>
+                <div class="float-end">
+                    <h5>$<?= number_format($subTotal) ?></h5>
+                </div>
             </div>
-            <?php } ?>
+            <div class="clearfix border-bottom border-secondary pb-3 mb-3">
+                <div class="float-start">
+                    <h5>Delivery</h5>
+                </div>
+                <div class="float-end">
+                    <h5>$<?= number_format($shippingCost) ?></h5>
+                </div>
+            </div>
+            <div class="clearfix pb-3">
+                <div class="float-start">
+                    <h5>Total</h5>
+                </div>
+                <div class="float-end">
+                    <h5>$<?= number_format($total) ?></h5>
+                </div>
+            </div>
         </div>
     </div>
     <div class="row">

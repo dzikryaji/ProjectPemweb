@@ -7,14 +7,15 @@ class Cart extends BaseController
     {
         $modal = $this->loadModel('CartModel');
         $data['carts'] = $modal->get();
-        
-        $this->loadView("cart","Cart", $data);
+
+        $this->loadView("cart", "Cart", $data);
     }
 
-    function addToCart(){
+    function addToCart()
+    {
         $idProduct = $_POST['idProduct'];
         $quantity = $_POST['quantity'];
-        if(isset($_SESSION['user_id'])){
+        if (isset($_SESSION['user_id'])) {
             $idUser = $_SESSION['user_id'];
 
             $cartModel = $this->loadModel('CartModel');
@@ -25,10 +26,11 @@ class Cart extends BaseController
         }
     }
 
-    function deleteCart() {
+    function deleteCart()
+    {
         $id_product = $_GET['id_product'];
 
-        if(isset($_SESSION['user_id'])){
+        if (isset($_SESSION['user_id'])) {
             $idUser = $_SESSION['user_id'];
 
             $cartModel = $this->loadModel('CartModel');
@@ -41,52 +43,49 @@ class Cart extends BaseController
         echo $id_product;
     }
 
-    function checkout() {
+    function checkout()
+    {
         if (!isset($_SESSION['user_id'])) {
             header("Location: " . BASEURL);
             exit;
         }
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            if ($_POST['saveContactCheck']) {
+                $address = $this->loadModel('AddressModel');
+                $address->save($_POST);
+            }
 
-        $modal = $this->loadModel('CartModel');
-        $data['carts'] = $modal->get();
-        
-        $this->loadView("checkout","Form Checkout", $data);
+            header('Location: ' . BASEURL . 'c=Cart&m=payment');
+            exit;
+        } else {
+            $modal = $this->loadModel('CartModel');
+            $data['carts'] = $modal->get();
+
+            $this->loadView("checkout", "Form Checkout", $data);
+        }
     }
 
-    function proccess_checkout() {
+    function payment()
+    {
         if (!isset($_SESSION['user_id'])) {
             header("Location: " . BASEURL);
             exit;
         }
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            if ($_POST['saveContactCheck']) {
+                $Payment = $this->loadModel('PaymentModel');
+                $Payment->save($_POST);
+            }
+            $Cart = $this->loadModel('CartModel');
+            $Cart->clear();
 
-        $address = $this->loadModel('AddressModel');
-        $address->save($_POST);
-    }
-
-    function payment() {
-        if (!isset($_SESSION['user_id'])) {
-            header("Location: " . BASEURL);
+            header('Location: ' . BASEURL . 'c=Cart&m=payment');
             exit;
+        } else {
+            $modal = $this->loadModel('CartModel');
+            $data['carts'] = $modal->get();
+
+            $this->loadView("payment", "Form Payment", $data);
         }
-
-        $address_id = $_GET['address_id'];
-        
-        $modal = $this->loadModel('CartModel');
-        $data['carts'] = $modal->get();
-        
-        $this->loadView("payment","Form Payment", $data);
     }
-
-    function proccess_payment() {
-
-        // echo "ID: $";
-        if (!isset($_SESSION['user_id'])) {
-            header("Location: " . BASEURL);
-            exit;
-        }
-
-        $Payment = $this->loadModel('PaymentModel');
-        $Payment->save($_POST);
-    }
-
 }
