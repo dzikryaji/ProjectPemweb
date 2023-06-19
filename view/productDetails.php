@@ -1,4 +1,4 @@
-<section class=" px-5 py-3 mb-0">
+<section class="d-flex flex-column align-items-center px-5 py-3 mb-0">
   <?php Flasher::flash(); ?>
   <div class="d-flex h-100">
     <div class="d-flex py-5 h-100 w-50 justify-content-center">
@@ -12,7 +12,7 @@
         <p><?= $product['description']; ?></p>
 
         <form action="<?= BASEURL ?>c=Cart&m=addToCart" method="post" class="d-flex">
-          <?php if($product['stock'] && !($_SESSION['user_email'] == "admin@vegan.org")): ?>
+          <?php if($product['stock']):?>
           <div class="pe-3 w-75">
             <label class="form-label">Stock: <?= $product['stock']; ?></label>
             <input value="Add to Cart" class="btn btn-primary w-100" <?= isset($_SESSION['user_id']) ? 'type="submit"' : 'type="button" data-bs-toggle="modal" data-bs-target="#guestModal"'?>>

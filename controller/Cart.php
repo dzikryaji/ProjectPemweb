@@ -15,10 +15,17 @@ class Cart extends BaseController
     {
         $idProduct = $_POST['idProduct'];
         $quantity = $_POST['quantity'];
-        if (isset($_SESSION['user_id']) && !$_SESSION['name'] == 'Admin' && !$_SESSION['email'] == 'admin@vegan.org') {
-            $idUser = $_SESSION['user_id'];
-            $productModel = $this->loadModel('ProductModel');
-            $product = $productModel->getProductbyId($idProduct);
+        if (isset($_SESSION['user_id'])) {
+            if($_SESSION['user_email'] == 'admin@vegan.org'){
+                $msg = "Login As A User to Add Product to Cart";
+                Flasher::setFlash($msg, 'danger');
+
+                header("Location: " . BASEURL . "c=Product&m=productDetails&p=" . $idProduct);
+                exit;
+            } else{
+                $idUser = $_SESSION['user_id'];
+                $productModel = $this->loadModel('ProductModel');
+                $product = $productModel->getProductbyId($idProduct);
 
             if($quantity < $product['stock']){
                 $cartModel = $this->loadModel('CartModel');
@@ -27,14 +34,15 @@ class Cart extends BaseController
                 $msg = "Quantity must less than stock";
                 Flasher::setFlash($msg, 'danger');
 
-                header("Location: " . BASEURL);
+                header("Location: " . BASEURL . "c=Product&m=productDetails&p=" . $idProduct);
                 exit;
+            }
             }
         } else {
             $msg = "Login to Add Product to Cart";
             Flasher::setFlash($msg, 'danger');
 
-            header("Location: " . BASEURL);
+            header("Location: " . BASEURL . "c=Product&m=productDetails&p=" . $idProduct);
             exit;
         }
     }
