@@ -17,7 +17,7 @@ class Cart extends BaseController
         $quantity = $_POST['quantity'];
         if (isset($_SESSION['user_id'])) {
             if($_SESSION['user_email'] == 'admin@vegan.org'){
-                $msg = "Login As A User to Add Product to Cart";
+                $msg = "Login As User to Add Product to Cart";
                 Flasher::setFlash($msg, 'danger');
 
                 header("Location: " . BASEURL . "c=Product&m=productDetails&p=" . $idProduct);
@@ -76,6 +76,8 @@ class Cart extends BaseController
                 $address->save($_POST);
             }
 
+            $_SESSION = array_merge($_SESSION, $_POST);
+
             header('Location: ' . BASEURL . 'c=Cart&m=payment');
             exit;
         } else {
@@ -101,8 +103,20 @@ class Cart extends BaseController
             }
             $Cart = $this->loadModel('CartModel');
             $Cart->clear();
+
+            $userId = $_SESSION["user_id"];
+            $username = $_SESSION["user_name"];
+            $userEmail = $_SESSION["user_email"];
+
+            session_destroy();
+            session_start();
             
-            header('Location: ' . BASEURL . 'c=Cart&m=payment');
+            $_SESSION["user_id"] = $userId;
+            $_SESSION["user_name"] = $username;
+            $_SESSION["user_email"] = $userEmail;
+            $_SESSION["cart_count"] = 0;
+
+            header('Location: ' . BASEURL . 'c=Home&m=index');
             exit;
         } else {
             $modal = $this->loadModel('CartModel');

@@ -108,11 +108,6 @@ class CartModel extends BaseModel
             $this->conn->query($sql);
 
             $this->conn->commit();
-
-            $_SESSION['cart_count'] = 0;
-
-            header('Location: ' . BASEURL . 'c=Home&m=index');
-            exit;
         } catch (Exception $e) {
             $this->conn->rollback();
             echo $this->conn->error;
