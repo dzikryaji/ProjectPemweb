@@ -27,7 +27,7 @@ class Cart extends BaseController
                 $productModel = $this->loadModel('ProductModel');
                 $product = $productModel->getProductbyId($idProduct);
 
-            if($quantity < $product['stock']){
+            if($quantity <= $product['stock']){
                 $cartModel = $this->loadModel('CartModel');
                 $cartModel->insertToCart($idUser, $idProduct, $quantity);
             } else {
@@ -115,6 +115,9 @@ class Cart extends BaseController
             $_SESSION["user_name"] = $username;
             $_SESSION["user_email"] = $userEmail;
             $_SESSION["cart_count"] = 0;
+
+            $msg = "Order Complete";
+            Flasher::setFlash($msg, 'success');
 
             header('Location: ' . BASEURL . 'c=Home&m=index');
             exit;

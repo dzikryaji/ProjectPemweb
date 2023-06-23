@@ -1,9 +1,8 @@
 <?php
-include_once "model/BaseModel.php";
-
 class BaseController {
-
+    
     function loadModel($modelName) {
+        include_once "model/BaseModel.php";
         include_once "model/$modelName.php";
         return new $modelName;
     }

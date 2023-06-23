@@ -25,7 +25,7 @@
           <?php else:?>
             <div class="pe-3 w-75">
             <label class="form-label">Stock: <?= $product['stock']; ?></label>
-            <input value="<?= !$product['stock'] ? "Out of Product" : "Add to Cart" ?>" class="btn btn-primary w-100" disabled>
+            <input value="Out of Stock" class="btn btn-primary w-100" disabled>
           </div>
 
           <div class=" pe-3 w-25">
